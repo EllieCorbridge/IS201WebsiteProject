@@ -1,0 +1,29 @@
+p{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#top{
+    text-decoration: underline;
+}
+
+.emphasizedText{
+    font-size: italic;
+    color:rgb(48, 159, 167)
+}
+
+body{
+    background-color: rgb(170, 218, 220);
+    font-family:'Times New Roman', Times, serif;
+    text-align: center;
+    border: 5px solid black;
+    margin: 20 px;
+}
+
+.centered-list{
+    padding-left: 0;
+    list-style-position: outside;
+    margin: 0 auto;
+    display:table;
+    text-align: left;
+}

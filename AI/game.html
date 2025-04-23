@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circus Joke Generator</title>
+    <style>
+        /* General styles for the page */
+        body {
+            background-color: #FFEBF0; /* Pastel pink */
+            font-family: 'Bungee', sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 0;
+            margin: 0; /* Remove default margin to make the banner stick to the tab bar */
+            overflow: hidden; /* Prevents scrollbars when confetti is triggered */
+        }
+
+        /* Smoothly shifting ombre banner at the top */
+        .banner {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to right, #FF69B4, #FFEB8A, #ADD8E6); /* Initial pastel gradient */
+            background-size: 400% 400%; /* Larger size to create a shifting effect */
+            animation: gradientShift 15s ease infinite; /* Smooth and gradual gradient shift */
+            position: fixed; /* Fix it at the top of the screen */
+            top: 0;
+            left: 0;
+            z-index: 1; /* Ensure the banner stays on top of the content */
+        }
+
+        /* Keyframes for gradual, smooth gradient shift */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%; /* Starting position */
+            }
+            50% {
+                background-position: 100% 50%; /* Midway position */
+            }
+            100% {
+                background-position: 200% 50%; /* End position */
+            }
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 3em;
+            color: #FF69B4; /* Pink */
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+            margin-top: 120px; /* Adjust for the fixed banner at the top */
+        }
+
+        /* Container for button and joke text (box around them) */
+        .box-container {
+            background-color: #FFF5F9; /* Very light pastel pink */
+            border: 2px dotted #FF69B4; /* Dotted pink border */
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            margin: 0 auto; /* Center the box */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styling */
+        .joke-button {
+            background-color: #ADD8E6; /* Pastel blue */
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%; /* Make the button full width */
+        }
+
+        .joke-button:hover {
+            background-color: #FFEB8A; /* Pastel yellow */
+            transform: scale(1.1);
+        }
+
+        /* Joke text styling */
+        .joke-text {
+            font-size: 1.5em;
+            color: #FF1493; /* Hot pink */
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Smoothly shifting ombre banner at the top -->
+    <div class="banner"></div>
+
+    <div class="container">
+        <h1 class="title">🎪 Silly Circus 🎪</h1>
+
+        <!-- Box Container for Button and Joke -->
+        <div class="box-container">
+            <button class="joke-button" onclick="generateJoke(); triggerConfetti()">🎉 Get a Joke! 🎉</button>
+            <p class="joke-text" id="joke-text"></p>
+        </div>
+    </div>
+
+    <!-- Include CanvasConfetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // Array of circus-themed jokes
+        const jokes = [
+            "Why did the circus lion eat the tightrope walker? He wanted a well-balanced meal!",
+            "Why don’t circus elephants use computers? Because they’re afraid of the mouse!",
+            "Why did the circus elephant wear red sneakers? Because his white ones were too tight!",
+            "Why did the circus clown bring a pencil to the show Because he wanted to draw a crowd!",
+            "Why did the acrobat bring a ladder to the circus? Because he wanted to reach new heights!",
+            "Why was the circus lion so good at his job? He was always lion around!"
+        ];
+
+        // Function to generate a random joke
+        function generateJoke() {
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            document.getElementById("joke-text").textContent = randomJoke;
+        }
+
+        // Function to trigger confetti animation
+        function triggerConfetti() {
+            const colors = ['#FF69B4', '#ADD8E6', '#FFEB8A']; // Pink, Blue, Yellow
+            const duration = 5000; // Duration of confetti effect in milliseconds
+
+            // Trigger confetti
+            confetti({
+                particleCount: 100,
+                startVelocity: 30,
+                spread: 360,
+                colors: colors,
+                origin: { x: 0.5, y: 0.5 }, // Center of the screen
+                disableForReducedMotion: true
+            });
+
+            // Optionally: Add a delay before clearing confetti
+            setTimeout(() => {
+                confetti.reset();
+            }, duration);
+        }
+    </script>
+</body>
+</html>
